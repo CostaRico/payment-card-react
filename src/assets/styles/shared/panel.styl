@@ -1,0 +1,51 @@
+.panel
+  background: #272629
+
+  &__headline
+    height: 40px
+    background: #343336
+    padding: 0 10px
+    position: relative
+
+  &__headline-title
+    color: #FFF200
+    padding: 13px 0
+    cursor: pointer
+    display: inline-block
+
+  &__headline-icon
+    color: rgba(255, 255, 255, 0.2)
+    display: inline-block
+    font-size: 18px
+    margin-right: 10px
+
+  &__headline-caret
+    width: 40px
+    height: 40px
+    color: #FFF200
+    position: absolute
+    top: 0
+    right: 0
+    line-height: 40px
+
+  &__body
+    padding: 0 10px
+    max-height: 0
+    opacity: 0
+    transition: all 0.2s ease-in-out
+    overflow: hidden
+
+  &--open
+    & ^[0]__headline-caret
+      transform: rotate(180deg)
+
+    & ^[0]__body
+      opacity: 1
+      max-height: 100vh
+
+  &--info
+    & ^[0]__headline
+      background: transparent
+
+    & ^[0]__body
+      background: #201F21
