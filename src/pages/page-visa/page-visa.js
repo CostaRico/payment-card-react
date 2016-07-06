@@ -97,7 +97,7 @@ export default class PageVisa extends React.Component {
                 </div>
               </div>
               <div className="form__row">
-                <div className="hint">
+                <div className="hint hint--list">
                   Ваш CVV2 - номер это три последнии цифры на обороте вашей карты.
                 </div>
               </div>
@@ -112,9 +112,27 @@ export default class PageVisa extends React.Component {
                 </div>
               </div>
             </div>
+            <div className="divider divider--panel"></div>
           </Panel>
           <Panel type="info" title="Условия пополнения">
-            text
+            <div className="table-info">
+              <div className="table-info__row">
+                <div className="table-info__th">Минимальная сумма (RUR)</div>
+                <div className="table-info__td">50</div>
+              </div>
+              <div className="table-info__row">
+                <div className="table-info__th">Максимальная сумма (RUR)</div>
+                <div className="table-info__td">100 0000</div>
+              </div>
+              <div className="table-info__row">
+                <div className="table-info__th">Комиссия за платеж</div>
+                <div className="table-info__td">Отсутствует</div>
+              </div>
+              <div className="table-info__row">
+                <div className="table-info__th">Вермя зачисления</div>
+                <div className="table-info__td">Моментально</div>
+              </div>
+            </div>
           </Panel>
         </div>
     )
