@@ -40,10 +40,10 @@ export default class Panel extends React.Component {
   }
   render() {
     return (
-        <div className={"panel " + (this.state.isOpen ? "panel--open" : "") + (this.props.type === 'info' ? " panel--info" : "")}>
+        <div className={'panel ' + (this.state.isOpen ? 'panel--open' : '') + (this.props.type === 'info' ? ' panel--info' : '')}>
           { this.getHeadLine() }
 
-          <div className="panel__body">
+          <div className='panel__body'>
             { this.props.children }
           </div>
         </div>

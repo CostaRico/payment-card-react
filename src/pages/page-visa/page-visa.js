@@ -1,140 +1,49 @@
 import React from 'react';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as setCurrency from '../../actions/setCurrency';
+
 import HeaderInner from '../../components/header-inner/heder-inner';
 import Panel from '../../components/panel/panel';
-import Select from '../../components/select/select';
+import VisaForm from '../../components/visaForm/visaForm';
+import PaymentInfo from '../../components/paymentInfo/paymentInfo';
 
-export default class PageVisa extends React.Component {
-  constructor(props) {
-    super(props);
+const TITLE = 'Пополнение';
+const TITLE_1 = 'VISA';
+const TITLE_2 = 'Условия пополнения';
 
-    this.state = {
-      pageTitle: 'Пополнение'
-    }
+class PageVisa extends React.Component {
+  onFormSubmit(form) {
+    console.log(form);
   }
 
   render() {
+    const { payment } = this.props;
+    const { setCurrency } = this.props.paymentActions;
+
     return (
-        <div>
-          <HeaderInner title={this.state.pageTitle} />
-          <Panel title="VISA">
-            <div className="form">
-              <div className="form__row">
-                <div className="form__item">
-                  <div className="field-item">
-                    <label className="field-item__label">Валюта:</label>
-                    <Select>
-                      <select>
-                        <option>RUR</option>
-                        <option>USD</option>
-                      </select>
-                    </Select>
-                  </div>
-                </div>
-                <div className="form__item">
-                  <div className="field-item">
-                    <label className="field-item__label">Сумма</label>
-                    <input type="text" className="field-input"/>
-                  </div>
-                </div>
-              </div>
-              <div className="form__row">
-                <div className="form__item">
-                  <div className="field-item">
-                    <label className="field-item__label">Номер карты (без пробелов)</label>
-                    <input type="text" className="field-input"/>
-                  </div>
-                </div>
-              </div>
-              <div className="form__row">
-                <div className="form__item form__item--half">
-                  <div className="field-item">
-                    <label className="field-item__label">Имя (как на карте)</label>
-                    <input type="text" className="field-input"/>
-                  </div>
-                </div>
-                <div className="form__item form__item--half">
-                  <div className="field-item">
-                    <label className="field-item__label">Фамилия (как на карте)</label>
-                    <input type="text" className="field-input"/>
-                  </div>
-                </div>
-              </div>
-              <div className="form__row">
-                <div className="form__item form__item--half">
-                  <div className="field-item">
-                    <label className="field-item__label">Дата окончания</label>
-                    <Select>
-                      <select>
-                        <option>06</option>
-                        <option>07</option>
-                      </select>
-                    </Select>
-                  </div>
-                </div>
-                <div className="form__item form__item--half">
-                  <div className="field-item">
-                    <Select>
-                      <select>
-                        <option>2020</option>
-                        <option>2021</option>
-                      </select>
-                    </Select>
-                  </div>
-                </div>
-              </div>
-              <div className="form__row">
-                <div className="form__item form__item--half">
-                  <div className="field-item">
-                    <label className="field-item__label">CVV2 / Защитный код:</label>
-                    <input type="text" className="field-input"/>
-                  </div>
-                </div>
-                <div className="form__item form__item--half">
-                  <div className="field-item">
-                    <label className="field-item__label">Бонусный код:</label>
-                    <input type="text" className="field-input"/>
-                  </div>
-                </div>
-              </div>
-              <div className="form__row">
-                <div className="hint hint--list">
-                  Ваш CVV2 - номер это три последнии цифры на обороте вашей карты.
-                </div>
-              </div>
-              <div className="form__row">
-                <div className="form__item">
-                  <div className="resume"><span>Сумма депозита (RUR):</span> <span>3000</span></div>
-                </div>
-              </div>
-              <div className="form__actions">
-                <div className="btn btn--submit">
-                  Подтвердить
-                </div>
-              </div>
-            </div>
-            <div className="divider divider--panel"></div>
-          </Panel>
-          <Panel type="info" title="Условия пополнения">
-            <div className="table-info">
-              <div className="table-info__row">
-                <div className="table-info__th">Минимальная сумма (RUR)</div>
-                <div className="table-info__td">50</div>
-              </div>
-              <div className="table-info__row">
-                <div className="table-info__th">Максимальная сумма (RUR)</div>
-                <div className="table-info__td">100 0000</div>
-              </div>
-              <div className="table-info__row">
-                <div className="table-info__th">Комиссия за платеж</div>
-                <div className="table-info__td">Отсутствует</div>
-              </div>
-              <div className="table-info__row">
-                <div className="table-info__th">Вермя зачисления</div>
-                <div className="table-info__td">Моментально</div>
-              </div>
-            </div>
-          </Panel>
-        </div>
+      <div>
+        <HeaderInner title={TITLE} />
+        <Panel title={TITLE_1}>
+          <VisaForm onSubmit={this.onFormSubmit.bind(this)} onCurrencyChange={setCurrency}/>
+        </Panel>
+        <Panel type='info' title={TITLE_2}>
+          <PaymentInfo currency={payment.currency} />
+        </Panel>
+      </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    payment: state.payment
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    paymentActions: bindActionCreators(setCurrency, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(PageVisa)
