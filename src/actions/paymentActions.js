@@ -4,3 +4,10 @@ export function setCurrency(currency) {
     payload: currency
   }
 }
+
+export function saveForm(form) {
+  return {
+    type: 'SAVE_FORM',
+    payload: form
+  }
+}

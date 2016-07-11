@@ -1,7 +1,8 @@
 import React from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as setCurrency from '../../actions/setCurrency';
+import { browserHistory } from 'react-router'
+import * as paymentActions from '../../actions/paymentActions';
 
 import HeaderInner from '../../components/header-inner/heder-inner';
 import Panel from '../../components/panel/panel';
@@ -14,7 +15,8 @@ const TITLE_2 = 'Условия пополнения';
 
 class PageVisa extends React.Component {
   onFormSubmit(form) {
-    console.log(form);
+    this.props.paymentActions.saveForm(form)
+    browserHistory.push('/summary')
   }
 
   render() {
@@ -43,7 +45,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    paymentActions: bindActionCreators(setCurrency, dispatch)
+    paymentActions: bindActionCreators(paymentActions, dispatch)
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PageVisa)

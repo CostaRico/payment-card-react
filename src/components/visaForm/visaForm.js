@@ -68,7 +68,7 @@ class VisaForm extends React.Component {
     const {
         fields: {currency, amount, cardNumber, firstName, lastName, month, year, cvv, code},
         handleSubmit,
-        onCurrencyChange,
+        onCurrencyChange
         } = this.props
 
     return (
@@ -185,7 +185,7 @@ class VisaForm extends React.Component {
 
 VisaForm.propTypes = {
   fields: PropTypes.object.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default reduxForm({
