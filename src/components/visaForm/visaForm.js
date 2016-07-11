@@ -25,39 +25,39 @@ const validate = values => {
   const errors = {}
 
   if (!values.currency) {
-    errors.currency = 'Это поле бязателно'
+    errors.currency = 'Required'
   }
 
   if (!values.amount) {
-    errors.amount = 'Это поле бязателно'
-  } else if (parseInt(values.amount) > Conditions[values.currency].max) {
-    errors.amount = 'Значение больше допустимого'
-  } else if (parseInt(values.amount) < Conditions[values.currency].min) {
-    errors.amount = 'Значение меньше допустимого'
+    errors.amount = 'Required'
+  } else if (Conditions[values.currency] && parseInt(values.amount) > Conditions[values.currency].max) {
+    errors.amount = 'More then max'
+  } else if (Conditions[values.currency] && parseInt(values.amount) < Conditions[values.currency].min) {
+    errors.amount = 'Less then min'
   }
 
   if (!values.cardNumber) {
-    errors.cardNumber = 'Это поле бязателно'
+    errors.cardNumber = 'Required'
   }
 
   if (!values.firstName) {
-    errors.firstName = 'Это поле бязателно'
+    errors.firstName = 'Required'
   }
 
   if (!values.lastName) {
-    errors.lastName = 'Это поле бязателно'
+    errors.lastName = 'Required'
   }
 
   if (!values.month) {
-    errors.month = 'Это поле бязателно'
+    errors.month = 'Required'
   }
 
   if (!values.year) {
-    errors.year = 'Это поле бязателно'
+    errors.year = 'Required'
   }
 
   if (!values.cvv) {
-    errors.cvv = 'Это поле бязателно'
+    errors.cvv = 'Required'
   }
 
   return errors
@@ -72,17 +72,24 @@ class VisaForm extends React.Component {
         } = this.props
 
     return (
+        
         <form className='form' onSubmit={handleSubmit}>
+          <div className="form__row">
+            <div className="form__item">
+              <div className="card-logo">
+                <img className="card-logo__image" src="src/assets/img/visa-icon.png" alt=""/>
+              </div>
+            </div>
+          </div>
           <div className='form__row'>
             <div className='form__item'>
-              <div className='field-item'>
+              <div className='field-item field-item'>
                 <label className='field-item__label'>Валюта:</label>
                 <Select>
                   <select {...currency}  onChange={event => {
                     currency.onChange(event)
                     onCurrencyChange(event.target.value)
                     }}>
-                    <option></option>
                     <option>RUR</option>
                     <option>USD</option>
                   </select>
@@ -175,7 +182,7 @@ class VisaForm extends React.Component {
           </div>
           <div className='form__actions'>
             <button onClick={handleSubmit.bind(this)} className='btn btn--submit'>
-              Подтвердить
+              Пополнить
             </button>
           </div>
         </form>

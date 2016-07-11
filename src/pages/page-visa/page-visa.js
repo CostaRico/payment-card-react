@@ -22,12 +22,28 @@ class PageVisa extends React.Component {
   render() {
     const { payment } = this.props;
     const { setCurrency } = this.props.paymentActions;
+    const { visa } = this.props.form;
+
+    const myInitialValues = {
+      initialValues: {
+        currency: this.props.payment.currency,
+        amount: visa.amount && visa.amount.value,
+        cardNumber: visa.cardNumber && visa.cardNumber.value,
+        firstName: visa.firstName && visa.firstName.value,
+        lastName: visa.lastName && visa.lastName.value,
+        month: visa.month && visa.month.value,
+        year: visa.year && visa.year.value,
+        cvv: visa.cvv && visa.cvv.value,
+        code: visa.code && visa.code.value
+      }
+    };
 
     return (
       <div>
         <HeaderInner title={TITLE} />
-        <Panel title={TITLE_1}>
-          <VisaForm onSubmit={this.onFormSubmit.bind(this)} onCurrencyChange={setCurrency}/>
+        <Panel open={true} title={TITLE_1}>
+          <VisaForm {...myInitialValues} onSubmit={this.onFormSubmit.bind(this)} onCurrencyChange={setCurrency}/>
+          <div className="divider divider--panel"></div>
         </Panel>
         <Panel type='info' title={TITLE_2}>
           <PaymentInfo currency={payment.currency} />
@@ -39,7 +55,8 @@ class PageVisa extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    payment: state.payment
+    payment: state.payment,
+    form: state.form
   }
 }
 

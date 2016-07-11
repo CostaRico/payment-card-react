@@ -5,7 +5,9 @@ export default class PageMain extends React.Component {
   render() {
     return (
         <div>
-          <Link to="inner" className="btn btn--default">Go to inner page</Link>
+          <div className="main-page-block">
+            <Link to="inner" className="btn btn--default">Go to inner page</Link>
+          </div>
         </div>
     )
   }

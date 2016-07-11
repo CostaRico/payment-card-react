@@ -4,9 +4,10 @@ export default class Panel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: this.props.open
     }
   }
+
   togglePanel() {
     var val = !this.state.isOpen;
 
