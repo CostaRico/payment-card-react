@@ -1,11 +1,17 @@
+// Почему класс, а не stateless component?
+// Почему тут есть PropTypes, а нигде больше его нет?
+
+
 import React, {PropTypes} from 'react'
 import Select from '../../components/select/select'
 import {reduxForm} from 'redux-form'
 
+// Почему три нижестоящие строки не вынесены в константы?
 const FIELDS = ['currency', 'amount', 'cardNumber', 'firstName', 'lastName', 'month', 'year', 'cvv', 'code']
 const MONTHS = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
 const YEARS = [2016, 2017, 2018, 2019, 2020, 2021, 2022];
 
+// Почему стиль именования словаря отличается? Почему не вынесено в констаны? Почему в другом файле словарь называется `INFO`?
 const Conditions = {
   RUR: {
     min: 50,
@@ -35,7 +41,7 @@ const validate = values => {
   } else if (Conditions[values.currency] && parseInt(values.amount) < Conditions[values.currency].min) {
     errors.amount = 'Less then min'
   }
-
+  // SWITCH CASE!!!!!!!
   if (!values.cardNumber) {
     errors.cardNumber = 'Required'
   }
@@ -74,9 +80,11 @@ class VisaForm extends React.Component {
     return (
         
         <form className='form' onSubmit={handleSubmit}>
+          // Почему не разбито на вложенные компоненты?
           <div className="form__row">
             <div className="form__item">
               <div className="card-logo">
+                // Почему урлы изображений не хранятся в констатах
                 <img className="card-logo__image" src="src/assets/img/visa-icon.png" alt=""/>
               </div>
             </div>
